@@ -28,7 +28,7 @@ public class SantaFeAnt {
          * @param xoff X offset
          * @param yoff Y offset
          */
-        Direction (int xoff, int yoff)
+        Direction(int xoff, int yoff)
         {
             this.xoff = xoff;
             this.yoff = yoff;
@@ -119,7 +119,7 @@ public class SantaFeAnt {
      * @return True if the next cell has food, false if none is found or if the
      *         ant is facing an adjacent boundary
      */
-    public boolean lookAhead ()
+    public boolean lookAhead()
     {
         int tempx = this.x + this.direction.xoff;
         int tempy = this.y + this.direction.yoff;
@@ -135,7 +135,7 @@ public class SantaFeAnt {
      * Ant visits current cell - eats food if food is available and then
      * continues its search for food.
      */
-    public void visit ()
+    public void visit()
     {
         SantaFeMap.MapCell cell = this.map.getCellAt(x, y);
         

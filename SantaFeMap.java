@@ -15,32 +15,34 @@ public class SantaFeMap {
      */
     public class MapCell
     {
+        /**
+         * Number of times this cell has been visited.
+         */
         public int timesVisited;
+        
+        /**
+         * Does this cell have food?
+         */
         public boolean _hasFood;
         
         /**
          * Creates a new cell. Has no food and has been visited zero times.
          */
-        public MapCell()
+        public MapCell ()
         {
             this.timesVisited = 0;
             this._hasFood = false;
         }
         
-              
         /**
          * Copy constructor. Throws NullPointerException if the parameter is null.
          * @param cell MapCell to be copied.
          * @throws NullPointerException
          */
-        public MapCell(MapCell cell) throws NullPointerException
+        public MapCell (MapCell cell) throws NullPointerException
         {
             if (cell == null)
-            {
-                this.timesVisited = 0;
-                this._hasFood = false;
                 throw new NullPointerException();
-            }
             
             this.timesVisited = cell.timesVisited;
             this._hasFood = cell._hasFood;
@@ -67,7 +69,7 @@ public class SantaFeMap {
         /**
          * Logs a visit to this cell. Consumes food if food is available.
          */
-        public void visit()
+        public void visit ()
         {
             this.timesVisited++;
             this._hasFood = false;
@@ -76,7 +78,7 @@ public class SantaFeMap {
         /**
          * @return Number of times this cell has been visited.
          */
-        public int timesVisited()
+        public int timesVisited ()
         {
             return this.timesVisited;
         }
@@ -85,7 +87,7 @@ public class SantaFeMap {
          * Prints a text representation of this cell.
          * @param out PrintStream to print output to.
          */
-        public void printCell(PrintStream out)
+        public void printCell (PrintStream out)
         {
             if (this.hasFood())
                 out.print('*');
@@ -95,19 +97,22 @@ public class SantaFeMap {
         /**
          * Prints a text representation of this cell to System.out
          */
-        public void printCell()
+        public void printCell ()
         {
             this.printCell(System.out);
         }               
     }
     
+    /**
+     * Map as collection of MapCells
+     */
     protected MapCell map[][];
     
     /**
      * Creates a square map of size x size
      * @param size Length of each side
      */
-    public SantaFeMap (int size)
+    public SantaFeMap(int size)
     {
         this.map = new MapCell[size][size];
         
@@ -122,7 +127,7 @@ public class SantaFeMap {
      * @throws FileNotFoundException
      * @throws InputMismatchException 
      */
-    public SantaFeMap (String filename) throws FileNotFoundException, InputMismatchException
+    public SantaFeMap(String filename) throws FileNotFoundException, InputMismatchException
     {
         Scanner s = null;
         
@@ -191,7 +196,7 @@ public class SantaFeMap {
      * Copy constructor. Creates of copy of the given map.
      * @param mapToCopy Map to copy.
      */
-    public SantaFeMap (SantaFeMap mapToCopy)
+    public SantaFeMap(SantaFeMap mapToCopy)
     {     
         int size = mapToCopy.map.length;
         this.map = new MapCell[size][size];
@@ -207,7 +212,7 @@ public class SantaFeMap {
      * @param y Y coordinate
      * @return 
      */
-    public boolean isInMapBounds (int x, int y)
+    public boolean isInMapBounds(int x, int y)
     {
         return (x >= 0 && y >= 0 && x < this.map.length && y < this.map.length);
     }
@@ -218,7 +223,7 @@ public class SantaFeMap {
      * @param y Y coordinate
      * @return MapCell at given coordinate, null if outside bounds of map
      */
-    public MapCell getCellAt (int x, int y)
+    public MapCell getCellAt(int x, int y)
     {
         if (this.isInMapBounds(x,y))
             return map[y][x];
