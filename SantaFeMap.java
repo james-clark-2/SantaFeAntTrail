@@ -104,6 +104,44 @@ public class SantaFeMap {
     }
     
     /**
+     * Represents cardinal directions
+     */
+    public enum Direction
+    {
+        //Keep these in clockwise order
+        NORTH(0,-1),
+        EAST(1,0),
+        SOUTH(0,1),
+        WEST(-1,0);
+        
+        private final int xoff;
+        private final int yoff;
+        
+        /**
+         * Creates a direction with an x,y offset for that direction
+         * @param xoff X offset
+         * @param yoff Y offset
+         */
+        Direction(int xoff, int yoff)
+        {
+            this.xoff = xoff;
+            this.yoff = yoff;
+        }
+
+        /**
+         * X offset for a direction.
+         * @return X offset
+         */
+        public final int xoffset() { return xoff; }
+        
+        /**
+         * Y offset for a direction.
+         * @return Y offset
+         */
+        public final int yoffset() { return yoff; }
+    }
+    
+    /**
      * Map as collection of MapCells
      */
     protected MapCell map[][];

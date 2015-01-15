@@ -10,47 +10,9 @@ public class SantaFeAnt {
     protected int movesMade;
     
     /**
-     * Represents cardinal directions.
-     */
-    protected enum Direction
-    {
-        //Keep these in clockwise order
-        NORTH(0,-1),
-        EAST(1,0),
-        SOUTH(0,1),
-        WEST(-1,0);
-        
-        private final int xoff;
-        private final int yoff;
-        
-        /**
-         * Creates a direction with an x,y offset for that direction
-         * @param xoff X offset
-         * @param yoff Y offset
-         */
-        Direction(int xoff, int yoff)
-        {
-            this.xoff = xoff;
-            this.yoff = yoff;
-        }
-
-        /**
-         * X offset for a direction.
-         * @return X offset
-         */
-        public final int xoff() { return xoff; }
-        
-        /**
-         * Y offset for a direction.
-         * @return Y offset
-         */
-        public final int yoff() { return yoff; }
-    };
-    
-    /**
      * Direction the ant is facing.
      */
-    protected Direction direction;
+    protected SantaFeMap.Direction direction;
     
     /**
      * Map the ant is searching for food.
@@ -67,7 +29,7 @@ public class SantaFeAnt {
         this.movesMade = 0;
         this.x = 0;
         this.y = 0;
-        this.direction = Direction.EAST;
+        this.direction = SantaFeMap.Direction.EAST;
         
         this.map = new SantaFeMap(map);
     }
@@ -81,8 +43,8 @@ public class SantaFeAnt {
           Cycle through enumerated directions. Assumes they are
            defined in clockwise order
         */
-        int index = (this.direction.ordinal() + 1) % Direction.values().length;
-        this.direction = Direction.values()[index];
+        int index = (this.direction.ordinal() + 1) % SantaFeMap.Direction.values().length;
+        this.direction = SantaFeMap.Direction.values()[index];
     }
     
     /**
@@ -95,8 +57,8 @@ public class SantaFeAnt {
            defined in clockwise order
           Using "three rights make a left" to avoid check for negative values
         */
-        int index = (this.direction.ordinal() + 3) % Direction.values().length;
-        this.direction = Direction.values()[index];
+        int index = (this.direction.ordinal() + 3) % SantaFeMap.Direction.values().length;
+        this.direction = SantaFeMap.Direction.values()[index];
     }
     
     /**
@@ -104,8 +66,8 @@ public class SantaFeAnt {
      */
     public void moveForward()
     {
-        int tempx = this.x + this.direction.xoff;
-        int tempy = this.y + this.direction.yoff;
+        int tempx = this.x + this.direction.xoffset();
+        int tempy = this.y + this.direction.yoffset();
         
         if (map.isInMapBounds(tempx, tempy))
         {
@@ -121,8 +83,8 @@ public class SantaFeAnt {
      */
     public boolean lookAhead()
     {
-        int tempx = this.x + this.direction.xoff;
-        int tempy = this.y + this.direction.yoff;
+        int tempx = this.x + this.direction.xoffset();
+        int tempy = this.y + this.direction.yoffset();
         
         if (map.isInMapBounds(tempx, tempy))
         {
